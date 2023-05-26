@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -35,12 +35,38 @@ public:
 
 class Container {
 private:
-	int n1 = 10;
-	int n2 = 15;
-	int n3 = 5;
-	int n4 = 25;
+	int n1;
+	int n2;
+	int n3;
+	int n4;
 	int num;
 public:
+	int num1;
+	int num2;
+	int num3;
+	int num4;
+
+	void Set_N() {
+		std::cout << "Введите количество компонентов в первом контейнере: ";
+		std::cin >> num1;
+		std::cout << std::endl;
+		Set_N1(num1);
+
+		std::cout << "Введите количество компонентов во втором контейнере: ";
+		std::cin >> num2;
+		std::cout << std::endl;
+		Set_N2(num2);
+
+		std::cout << "Введите вместимость в контейнере для брака: ";
+		std::cin >> num3;
+		std::cout << std::endl;
+		Set_N3(num3);
+
+		std::cout << "Введите вместимость в контейнере для компонентов с печать: ";
+		std::cin >> num4;
+		std::cout << std::endl;
+		Set_N4(num4);
+	}
 	void Set_N1(int v) {
 		n1 = v;
 	};
@@ -136,8 +162,9 @@ public:
 	void Step_1() {
 		//шаг 1
 		int v;
-		std::cout << "Для старта нажмите 1 и Enter: " << container.Get_N1()<< std::endl;
+		std::cout << "Для старта нажмите 1 и Enter: " << std::endl;
 		std::cin >> v;
+		container.Set_N();
 		if (ui.Get_I4(v) == 1) {
 			drive.Set_Q0(1);
 			record(0, 0, 0, 0, 1, 0);
@@ -220,7 +247,7 @@ public:
 		if (container.Get_N4() != 0) {
 			Step_7b();
 		}
-		else Step_7b();
+		else Step_7a();
 	}
 	void Step_7b() {
 		container.Set_N4(container.Get_N4() - 1);
@@ -274,34 +301,7 @@ int main() {
 	setlocale(LC_ALL, "Russian");
 	srand(time(NULL));
 
-	Container container{};
 	Controller controller{};
-	/*int num1;
-	int num2;
-	int num3;
-	int num4;
-	
-	std::cout << "Введите количество компонентов в первом контейнере: ";
-	std::cin >> num1;
-	std::cout << std::endl;
-    container.Set_N1(num1);
-	std::cout << container.Get_N1();
-
-	std::cout << "Введите количество компонентов во втором контейнере: ";
-	std::cin >> num2;
-	std::cout << std::endl;
-	container.Set_N2(num2);
-
-	std::cout << "Введите вместимость в контейнере для брака: ";
-	std::cin >> num3;
-	std::cout << std::endl;
-	container.Set_N3(num3);
-
-	std::cout << "Введите вместимость в контейнере для компонентов с печать: ";
-	std::cin >> num4;
-	std::cout << std::endl;
-	container.Set_N4(num4);*/
-
 	controller.Step_1();
 
 	std::cout << "Работа технологического процесса завершена." << std::endl << std::endl;
